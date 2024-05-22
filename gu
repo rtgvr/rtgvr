@@ -1,0 +1,21 @@
+import requests
+import pandas as pd
+
+url = 'http://example.com/stock-data'
+response = requests.get(url)
+
+data = response.json()
+
+df = pd.DataFrame(data)
+df['Date'] = pd.to_datetime(df['Date'])
+
+# 计算股票收益率
+df['Return'] = df['Close'].pct_change()
+
+# 计算股票收益率的统计信息
+return_stats = df['Return'].describe()
+
+print('Stock Return Statistics:')
+print(return_stats)
+
+
