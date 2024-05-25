@@ -1,0 +1,49 @@
+class Heart:
+    def __init__(self):
+        self.points = []
+        self.colors = []
+        self.particles = []
+        self.speed = 5
+        self.pos = (w/2, h/2)
+        self.rotation = 0
+        self.scale = 1
+        self._create_heart()
+​
+    def _create_heart(self):
+        for i in range(1000):
+            theta = i / 1000 * math.pi * 2
+            r = heart_function(theta)[0]
+            x = r * math.cos(theta)
+            y = r * math.sin(theta)
+            self.points.append((x, y))
+            self.colors.append((random.randint(128, 255), random.randint(0, 128), random.randint(0, 128)))
+​
+    def update(self):
+        for p in self.particles:
+            p.update()
+        self.particles = [p for p in self.particles if p.alive]
+​
+        if random.random() < 0.3:
+            x, y = self.pos
+            dx = random.uniform(-1, 1) * self.speed
+            dy = random.uniform(-1, 1) * self.speed
+            p = Particle((x+dx, y+dy), (dx/4, dy/4))
+            self.particles.append(p)
+​
+        self.rotation += 0.001
+        self.scale = curve(self.rotation)
+​
+    def draw(self, canvas):
+        cx, cy = self.pos
+        for i, (x, y) in enumerate(self.points):
+            r, g, b = self.colors[i]
+​
+            x *= self.scale
+            y *= self.scale
+​
+            x, y = rotate(x, y, self.rotation)
+​
+            x += cx
+            y += cy
+​
+            canvas.create_oval(x-1, y-1, x+1, y+1, fill="#%02x%02x%02x" % (r, g, b), width=0)
