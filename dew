@@ -1,0 +1,8 @@
+
+    # 127.0.0.1表示本机可浏览
+    # 0.0.0.0表示所有用户均可浏览，一般用于部署到服务器
+    # 若部署到服务器，请务必在云控制面板的防火墙中允许8090端口
+    if(app_local):
+        app.run_server(host='127.0.0.1', debug=True, port='8090')
+    else:
+        app.run_server(host='0.0.0.0', debug=False, port='8090')
