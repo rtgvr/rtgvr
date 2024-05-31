@@ -1,0 +1,33 @@
+import java.io.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Date;
+import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import lombok.extern.slf4j.Slf4j;
+@Component
+@EnableScheduling
+@Slf4j
+public class BackUpDatabase {
+    // 数据库连接信息
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/yourDataBase?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&allowMultiQueries=true&useSSL=false";
+    private static final String DATABASE = "yourDataBase";
+    private static final String USER = "yourUserName";
+    private static final String PASSWORD = "yourPwd";
+
+    // 备份文件存储路径
+    private static final String BACKUP_WIN_DIR = "D:/yourWinPath";
+    private static final String BACKUP_LINUX_DIR = "yourLinuxPath";
+    private static final String BACKUP_FILE = "database_backup.sql";
+
+    // 保留备份文件的天数
+    private static final int LIMIT_LENGTH = 30;
+
+    // 定时任务方法，每天凌晨3点执行
+    @Scheduled(cron = "0 0 3 * * *")
+    public void backUp() {
+        // 执行备份操作
+    }
+}
