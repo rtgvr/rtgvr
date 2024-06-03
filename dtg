@@ -1,0 +1,53 @@
+import base64
+import json
+import urllib
+import requests
+
+
+def main():
+    url = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token
+
+    # image 可以通过 get_file_content_as_base64("C:\fakepath\1.bmp",True) 方法获取
+    payload = '&detect_language=false&paragraph=false&probability=false'
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    result_str = response.text
+
+    # 解析 JSON 字符串
+    data = json.loads(result_str)
+
+    # 提取出 words 后的两个字符串
+    if "words_result" in data:
+        words_result = data["words_result"]
+        if len(words_result) >= 2:
+            word1 = words_result[0]["words"]
+            word2 = words_result[1]["words"]
+            print("提取结果：", word1, word2)
+        else:
+            print("Error: 'words_result' 中的元素数量不足 2")
+    else:
+        print("Error: 没有找到 'words_result' 键")
+    result_str = word1+'\n' + word2
+    print(result_str)
+
+
+def get_file_content_as_base64(path, urlencoded=False):
+    """
+    获取文件base64编码
+    :param path: 文件路径
+    :param urlencoded: 是否对结果进行urlencoded
+    :return: base64编码信息
+    """
+    with open(path, "rb") as f:
+        content = base64.b64encode(f.read()).decode("utf8")
+        if urlencoded:
+            content = urllib.parse.quote_plus(content)
+    return content
+
+
+if __name__ == '__main__':
+    main()
