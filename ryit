@@ -1,0 +1,18 @@
+public class MathUtils {
+    public static final double PI = 3.14159;
+
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
+    public static double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public static double multiply(double a, double b) {
+        return a * b;
+    }
+}
+
+double circumference = MathUtils.PI * 2 * 5;
+System.out.println(circumference); // 打印圆的周长
