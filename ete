@@ -1,0 +1,8 @@
+uni.request({
+  url: '后端接口地址,获取订单id',
+  method: 'POST',
+  data: { 传入接口需要的参数,如商品金额,商品个数等 },
+  success(res) {
+    console.log(res.data.orderId)
+  }
+})
