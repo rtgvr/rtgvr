@@ -1,0 +1,15 @@
+import { onMounted } from "vue"export default {
+setup() {  // mounted
+  onMounted(() => {   console.log('Component is mounted!')
+  })
+}
+}
+<d i v v-for="item in ss" v-if="item.show" :key="item.id">
+{{ item.show }}</d i v>data(){
+return{
+  ss:[
+{ id: 1, show: true, name: '1' },
+{ id: 2, show: false, name: '2' },
+{ id: 3, show: true, name: '3' },
+  ]
+}}
