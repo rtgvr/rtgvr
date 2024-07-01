@@ -1,0 +1,30 @@
+    /* 如果是ARM平台，直接设置大小为屏幕的大小 */
+#if __arm__
+     /* 重设大小 */
+     this->resize(list_screen.at(0)->geometry().width(),
+                 list_screen.at(0)->geometry().height());
+#else
+     /* 否则则设置主窗体大小为800x480 */
+     this->resize(800,400);
+#endif
+ 
+    /* 构建布局标题和背景色 */
+    this->setWindowTitle("智能车载系统");
+    this->setStyleSheet("background-color: rgb(240, 255, 255);");   //QT颜色标：http://t.csdn.cn/SF7Rc
+ 
+    //给进程分配空间
+    my_pro = new QProcess(this);
+ 
+    //时间显示label
+    QLabel *time_label = new QLabel(this);
+    time_label->setGeometry(10,20,240,100);//设置坐标
+    //time_label->setStyleSheet("font-size:55px;color:black");//设置大小颜色
+    time_label->setFont(QFont("Helvetica", 72));
+    //time_label->ssetFont(QFont("Helvetica", 30)); // 设置字体为Arial，大小为16
+ 
+    //日期显示label
+    QLabel *date_label = new QLabel(this);
+    date_label->setGeometry(200,100,240,100);//设置坐标
+    date_label->setStyleSheet("font-size:25px;color:green");//设置大小颜色
+ 
+   
