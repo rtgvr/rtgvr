@@ -1,0 +1,17 @@
+def get_ip():
+    host = ''  # 主机
+    user_name = ''  # 用户名
+    password = ''  # 密码
+    proxy_url = f'http://{user_name}:{password}@{host}'  # 将上面三个参数拼接为专属代理IP获取网址
+    proxies = {
+        'http': proxy_url,
+        'https': proxy_url
+    }
+ 
+    url = "http://lumtest.com/myip.json"  # 默认获取的接口（不用修改）
+    response = requests.get(url, proxies=proxies, timeout=10).text  # 发送请求获取IP
+    # print('代理IP详情信息：',response)
+    response_dict = eval(response)  # 将字符串转为字典，方便我们提取代理IP
+    ip = response_dict['ip']
+    # print('IP：',ip)
+    return ip
